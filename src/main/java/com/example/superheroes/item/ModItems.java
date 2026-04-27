@@ -12,6 +12,11 @@ public final class ModItems {
 			new HomelanderSuitItem(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.EPIC))
 	);
 
+	public static final IronManSuitItem IRON_MAN_SUIT = register(
+			"iron_man_suit",
+			new IronManSuitItem(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.EPIC))
+	);
+
 	public static final CompoundVItem COMPOUND_V = register(
 			"compound_v",
 			new CompoundVItem(new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON))

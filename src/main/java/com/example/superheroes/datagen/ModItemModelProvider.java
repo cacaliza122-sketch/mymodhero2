@@ -19,6 +19,7 @@ public final class ModItemModelProvider extends FabricModelProvider {
 	@Override
 	public void generateItemModels(ItemModelGenerators generator) {
 		generator.generateFlatItem(ModItems.HOMELANDER_SUIT, ModelTemplates.FLAT_ITEM);
+		generator.generateFlatItem(ModItems.IRON_MAN_SUIT, ModelTemplates.FLAT_ITEM);
 		generator.generateFlatItem(ModItems.COMPOUND_V, ModelTemplates.FLAT_ITEM);
 		generator.generateFlatItem(ModItems.MILK_BOTTLE, ModelTemplates.FLAT_ITEM);
 	}

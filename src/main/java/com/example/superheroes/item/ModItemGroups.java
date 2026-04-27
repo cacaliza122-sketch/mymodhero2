@@ -19,6 +19,7 @@ public final class ModItemGroups {
 			.title(Component.translatable("itemGroup.superheroes"))
 			.displayItems((params, output) -> {
 				output.accept(ModItems.HOMELANDER_SUIT);
+				output.accept(ModItems.IRON_MAN_SUIT);
 				output.accept(ModItems.COMPOUND_V);
 				output.accept(ModItems.MILK_BOTTLE);
 			})

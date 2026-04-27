@@ -2,6 +2,7 @@ package com.example.superheroes.client.hud;
 
 import com.example.superheroes.client.ClientHeroState;
 import com.example.superheroes.client.ModKeys;
+import com.example.superheroes.hero.HeroTheme;
 import com.example.superheroes.network.ActivateAbilityC2SPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.DeltaTracker;
@@ -22,12 +23,7 @@ public final class RadialMenuHud {
 	private static final int CURSOR_RADIUS = 56;
 
 	private static final int COLOR_TEXT_IDLE = 0xFFE3E5F0;
-	private static final int COLOR_TEXT_ACTIVE = 0xFFFFF1B0;
 	private static final int COLOR_KEY_IDLE = 0xFF7C8499;
-	private static final int COLOR_KEY_ACTIVE = 0xFFFFC538;
-	private static final int COLOR_BORDER_IDLE = 0x55FFD27A;
-	private static final int COLOR_BORDER_ACTIVE = 0xFFFFC538;
-	private static final int COLOR_GLOW = 0x55FFD27A;
 	private static final int COLOR_SHADOW = 0x77000000;
 
 	private static boolean open;
@@ -112,9 +108,10 @@ public final class RadialMenuHud {
 		int cx = mc.getWindow().getGuiScaledWidth() / 2;
 		int cy = mc.getWindow().getGuiScaledHeight() / 2;
 		int n = abilities.size();
+		HeroTheme theme = ClientHeroState.theme();
 		drawBackplate(graphics, cx, cy);
-		drawCursor(graphics, mc, cx, cy);
-		drawHub(graphics, cx, cy);
+		drawCursor(graphics, mc, cx, cy, theme);
+		drawHub(graphics, cx, cy, theme);
 		for (int i = 0; i < n; i++) {
 			double angle = (i * 2 * Math.PI / n) - Math.PI / 2;
 			int x = cx + (int) (Math.cos(angle) * ITEM_RADIUS);
@@ -127,15 +124,15 @@ public final class RadialMenuHud {
 			int slotWidth = Math.max(SLOT_MIN_WIDTH, textWidth + SLOT_PADDING_X * 2);
 			int slotX = x - slotWidth / 2;
 			int slotY = y - SLOT_HEIGHT / 2;
-			drawSlot(graphics, slotX, slotY, slotWidth, SLOT_HEIGHT, active);
-			graphics.drawCenteredString(mc.font, name, x, y - 9, active ? COLOR_TEXT_ACTIVE : COLOR_TEXT_IDLE);
-			graphics.drawCenteredString(mc.font, key, x, y + 3, active ? COLOR_KEY_ACTIVE : COLOR_KEY_IDLE);
+			drawSlot(graphics, slotX, slotY, slotWidth, SLOT_HEIGHT, active, theme);
+			graphics.drawCenteredString(mc.font, name, x, y - 9, active ? theme.radialTextActive() : COLOR_TEXT_IDLE);
+			graphics.drawCenteredString(mc.font, key, x, y + 3, active ? theme.radialKeyActive() : COLOR_KEY_IDLE);
 		}
 	}
 
-	private static void drawHub(GuiGraphics graphics, int cx, int cy) {
+	private static void drawHub(GuiGraphics graphics, int cx, int cy, HeroTheme theme) {
 		HudUtil.roundedRectFill(graphics, cx - 24, cy - 24, 48, 48, 0xCC080A14);
-		HudUtil.roundedRectBorder(graphics, cx - 24, cy - 24, 48, 48, COLOR_BORDER_IDLE);
+		HudUtil.roundedRectBorder(graphics, cx - 24, cy - 24, 48, 48, theme.radialBorderIdle());
 		graphics.fill(cx - 18, cy - 22, cx + 18, cy - 21, 0x44FFFFFF);
 	}
 
@@ -146,7 +143,7 @@ public final class RadialMenuHud {
 				cx + BACKPLATE_RADIUS, cy + BACKPLATE_RADIUS, 0x88101422, 0x44050710);
 	}
 
-	private static void drawCursor(GuiGraphics graphics, Minecraft mc, int cx, int cy) {
+	private static void drawCursor(GuiGraphics graphics, Minecraft mc, int cx, int cy, HeroTheme theme) {
 		if (mc.player == null) {
 			return;
 		}
@@ -161,10 +158,10 @@ public final class RadialMenuHud {
 		double r = CURSOR_RADIUS;
 		int px = cx + (int) Math.round(r * Math.cos(a));
 		int py = cy + (int) Math.round(r * Math.sin(a));
-		drawSmoothLine(graphics, cx, cy, px, py, COLOR_GLOW);
+		drawSmoothLine(graphics, cx, cy, px, py, theme.radialGlow());
 		graphics.fill(px - 4, py - 4, px + 5, py + 5, COLOR_SHADOW);
-		graphics.fill(px - 3, py - 3, px + 4, py + 4, COLOR_BORDER_ACTIVE);
-		graphics.fill(px - 2, py - 2, px + 3, py + 3, COLOR_TEXT_ACTIVE);
+		graphics.fill(px - 3, py - 3, px + 4, py + 4, theme.radialBorderActive());
+		graphics.fill(px - 2, py - 2, px + 3, py + 3, theme.radialTextActive());
 	}
 
 	private static void drawSmoothLine(GuiGraphics graphics, int x0, int y0, int x1, int y1, int color) {
@@ -183,14 +180,14 @@ public final class RadialMenuHud {
 		}
 	}
 
-	private static void drawSlot(GuiGraphics graphics, int x, int y, int width, int height, boolean selectedSlot) {
+	private static void drawSlot(GuiGraphics graphics, int x, int y, int width, int height, boolean selectedSlot, HeroTheme theme) {
 		HudUtil.dropShadow(graphics, x, y, width, height, 2, COLOR_SHADOW);
 		if (selectedSlot) {
-			HudUtil.roundedRectFill(graphics, x - 3, y - 3, width + 6, height + 6, COLOR_GLOW);
+			HudUtil.roundedRectFill(graphics, x - 3, y - 3, width + 6, height + 6, theme.radialGlow());
 		}
-		int top = selectedSlot ? 0xF02A1A14 : 0xE0181C2A;
-		int bottom = selectedSlot ? 0xE01A0F0A : 0xC8080A14;
-		int border = selectedSlot ? COLOR_BORDER_ACTIVE : COLOR_BORDER_IDLE;
+		int top = selectedSlot ? 0xF02A1A14 : theme.panelTop();
+		int bottom = selectedSlot ? 0xE01A0F0A : theme.panelBottom();
+		int border = selectedSlot ? theme.radialBorderActive() : theme.radialBorderIdle();
 		HudUtil.roundedRectGradient(graphics, x, y, width, height, top, bottom);
 		HudUtil.roundedRectBorder(graphics, x, y, width, height, border);
 		graphics.fill(x + 3, y + 1, x + width - 3, y + 2, 0x33FFFFFF);

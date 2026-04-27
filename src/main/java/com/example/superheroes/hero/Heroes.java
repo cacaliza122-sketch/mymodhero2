@@ -10,12 +10,14 @@ import java.util.Map;
 public final class Heroes {
 	private static final Map<ResourceLocation, Hero> REGISTRY = new LinkedHashMap<>();
 	public static final HomelanderHero HOMELANDER = new HomelanderHero();
+	public static final IronManHero IRON_MAN = new IronManHero();
 
 	private Heroes() {
 	}
 
 	public static void init() {
 		register(HOMELANDER);
+		register(IRON_MAN);
 	}
 
 	public static void register(Hero hero) {
