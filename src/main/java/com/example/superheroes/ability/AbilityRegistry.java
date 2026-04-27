@@ -17,6 +17,7 @@ public final class AbilityRegistry {
 	public static final SupersonicAbility SUPERSONIC = new SupersonicAbility();
 	public static final RepulsorAbility REPULSOR = new RepulsorAbility();
 	public static final BoxEspAbility BOX_ESP = new BoxEspAbility();
+	public static final UnibeamAbility UNIBEAM = new UnibeamAbility();
 
 	private AbilityRegistry() {
 	}
@@ -29,6 +30,7 @@ public final class AbilityRegistry {
 		register(SUPERSONIC);
 		register(REPULSOR);
 		register(BOX_ESP);
+		register(UNIBEAM);
 	}
 
 	public static void register(Ability ability) {

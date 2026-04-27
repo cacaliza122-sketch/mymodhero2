@@ -12,6 +12,7 @@ public final class AbilityIds {
 	public static final ResourceLocation SUPERSONIC = ModId.of("supersonic");
 	public static final ResourceLocation REPULSOR = ModId.of("repulsor");
 	public static final ResourceLocation BOX_ESP = ModId.of("box_esp");
+	public static final ResourceLocation UNIBEAM = ModId.of("unibeam");
 
 	private AbilityIds() {
 	}
