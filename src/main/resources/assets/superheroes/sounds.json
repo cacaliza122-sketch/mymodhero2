@@ -1,0 +1,20 @@
+{
+	"lightning.thunder.anime": {
+		"subtitle": "subtitles.entity.lightning_bolt.thunder",
+		"sounds": [
+			{
+				"name": "superheroes:lightning/thunder_anime",
+				"stream": true
+			}
+		]
+	},
+	"lightning.thunder.loud": {
+		"subtitle": "subtitles.entity.lightning_bolt.thunder",
+		"sounds": [
+			{
+				"name": "superheroes:lightning/thunder_loud",
+				"stream": true
+			}
+		]
+	}
+}
