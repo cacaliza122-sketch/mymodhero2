@@ -29,7 +29,7 @@ public final class IronManFlightAbility implements Ability {
 
 	@Override
 	public float costPerTick() {
-		return 0.3f;
+		return 2.5f;
 	}
 
 	@Override
@@ -38,6 +38,7 @@ public final class IronManFlightAbility implements Ability {
 		a.mayfly = true;
 		a.flying = true;
 		player.onUpdateAbilities();
+		player.startFallFlying();
 		ServerLevel level = player.serverLevel();
 		level.playSound(null, player.getX(), player.getY(), player.getZ(),
 				SoundEvents.IRON_GOLEM_REPAIR, SoundSource.PLAYERS, 0.6f, 1.4f);
@@ -46,10 +47,8 @@ public final class IronManFlightAbility implements Ability {
 
 	@Override
 	public void onTickActive(ServerPlayer player) {
-		Abilities a = player.getAbilities();
-		if (!a.flying) {
-			a.flying = true;
-			player.onUpdateAbilities();
+		if (!player.isFallFlying()) {
+			player.startFallFlying();
 		}
 		ServerLevel level = player.serverLevel();
 		Vec3 pos = player.position();
@@ -71,5 +70,6 @@ public final class IronManFlightAbility implements Ability {
 			a.mayfly = false;
 		}
 		player.onUpdateAbilities();
+		player.stopFallFlying();
 	}
 }

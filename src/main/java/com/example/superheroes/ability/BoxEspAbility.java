@@ -21,7 +21,7 @@ public final class BoxEspAbility implements Ability {
 
 	@Override
 	public float costPerTick() {
-		return 0.15f;
+		return 1.2f;
 	}
 
 	@Override

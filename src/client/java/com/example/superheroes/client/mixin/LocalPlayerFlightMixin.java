@@ -20,6 +20,8 @@ public abstract class LocalPlayerFlightMixin {
 	private static final double ACCEL = 0.12;
 	private static final double MIN_SPEED_MUL = 0.5;
 	private static final double MADNESS_SPEED_MUL = 1.5;
+	private static final double IRON_MAN_BASE_MUL = 0.7;
+	private static final double SUPERSONIC_MUL = 2.4;
 	private static final double FRICTION_HORIZONTAL = 0.92;
 	private static final double FRICTION_VERTICAL = 0.90;
 
@@ -30,7 +32,10 @@ public abstract class LocalPlayerFlightMixin {
 			return;
 		}
 		HeroData heroData = ClientHeroState.data();
-		if (!heroData.isActive(AbilityIds.FLIGHT)) {
+		boolean homelanderFlight = heroData.isActive(AbilityIds.FLIGHT);
+		boolean ironFlight = heroData.isActive(AbilityIds.IRON_MAN_FLIGHT);
+		boolean supersonic = heroData.isActive(AbilityIds.SUPERSONIC);
+		if (!homelanderFlight && !ironFlight) {
 			return;
 		}
 
@@ -44,6 +49,12 @@ public abstract class LocalPlayerFlightMixin {
 		}
 		if (ModEffects.isMadness(player)) {
 			speedMul *= MADNESS_SPEED_MUL;
+		}
+		if (ironFlight) {
+			speedMul *= IRON_MAN_BASE_MUL;
+			if (supersonic) {
+				speedMul *= SUPERSONIC_MUL;
+			}
 		}
 		double maxHorizontal = MAX_HORIZONTAL_SPEED * speedMul;
 		double maxVertical = MAX_VERTICAL_SPEED * speedMul;

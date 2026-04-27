@@ -35,7 +35,13 @@ public class BindingsScreen extends Screen {
 			Button button = Button.builder(
 					buildLabel(abilityId, current),
 					btn -> {
-						ResourceKind next = current == ResourceKind.ENERGY ? ResourceKind.MANA : ResourceKind.ENERGY;
+						boolean manaAvailable = ClientHeroState.manaMax() > 0f;
+						ResourceKind next;
+						if (!manaAvailable) {
+							next = ResourceKind.ENERGY;
+						} else {
+							next = current == ResourceKind.ENERGY ? ResourceKind.MANA : ResourceKind.ENERGY;
+						}
 						ClientPlayNetworking.send(new BindAbilityResourceC2SPayload(abilityId, next));
 						if (this.minecraft != null) {
 							this.minecraft.setScreen(new BindingsScreen());
