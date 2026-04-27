@@ -26,17 +26,17 @@ public final class IronManHero implements Hero {
 
 	@Override
 	public float getEnergyMax() {
-		return 120f;
+		return 1000f;
 	}
 
 	@Override
 	public float getEnergyRegenPerTick() {
-		return 0.4f;
+		return 3.0f;
 	}
 
 	@Override
 	public float getManaMax() {
-		return 80f;
+		return 0f;
 	}
 
 	@Override
@@ -55,9 +55,6 @@ public final class IronManHero implements Hero {
 
 	@Override
 	public ResourceKind getDefaultBinding(ResourceLocation abilityId) {
-		if (abilityId.equals(AbilityIds.BOX_ESP)) {
-			return ResourceKind.MANA;
-		}
 		return ResourceKind.ENERGY;
 	}
 

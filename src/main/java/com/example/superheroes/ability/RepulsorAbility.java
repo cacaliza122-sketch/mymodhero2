@@ -17,7 +17,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public final class RepulsorAbility implements Ability {
-	private static final double RANGE = 32.0;
+	private static final double RANGE = 40.0;
 	private static final float DAMAGE = 8.0f;
 
 	@Override
@@ -32,7 +32,7 @@ public final class RepulsorAbility implements Ability {
 
 	@Override
 	public float costOnActivate() {
-		return 8f;
+		return 60f;
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public final class RepulsorAbility implements Ability {
 			target.hurtMarked = true;
 		}
 		Vec3 hand = eye.add(dir.scale(0.5));
-		ModNetworking.broadcastLaser(player, hand, actualEnd);
+		ModNetworking.broadcastRepulsor(player, hand, actualEnd);
 
 		level.sendParticles(ParticleTypes.FLAME,
 				hand.x, hand.y, hand.z, 14, 0.25, 0.25, 0.25, 0.05);

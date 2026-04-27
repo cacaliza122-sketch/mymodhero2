@@ -14,8 +14,6 @@ import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.phys.Vec3;
 
 public final class SupersonicAbility implements Ability {
-	private static final double BOOST_SPEED = 1.6;
-
 	@Override
 	public ResourceLocation getId() {
 		return AbilityIds.SUPERSONIC;
@@ -33,7 +31,7 @@ public final class SupersonicAbility implements Ability {
 
 	@Override
 	public float costPerTick() {
-		return 1.5f;
+		return 12.0f;
 	}
 
 	@Override
@@ -60,14 +58,14 @@ public final class SupersonicAbility implements Ability {
 			a.flying = true;
 			player.onUpdateAbilities();
 		}
-		Vec3 dir = player.getLookAngle();
-		Vec3 boost = dir.scale(BOOST_SPEED);
-		player.setDeltaMovement(boost);
-		player.hurtMarked = true;
+		if (!player.isFallFlying()) {
+			player.startFallFlying();
+		}
 		player.fallDistance = 0f;
 
 		ServerLevel level = player.serverLevel();
 		Vec3 pos = player.position();
+		Vec3 dir = player.getLookAngle();
 		Vec3 back = pos.add(dir.reverse().scale(0.5));
 		level.sendParticles(ParticleTypes.FLAME,
 				back.x, back.y + 0.3, back.z, 6, 0.15, 0.15, 0.15, 0.02);

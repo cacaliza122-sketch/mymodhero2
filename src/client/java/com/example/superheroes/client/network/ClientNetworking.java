@@ -5,8 +5,10 @@ import com.example.superheroes.client.ClientHeroState;
 import com.example.superheroes.client.RemoteHeroSkins;
 import com.example.superheroes.client.fx.ScreenShakeManager;
 import com.example.superheroes.client.render.LaserBeamRenderer;
+import com.example.superheroes.client.render.RepulsorBeamRenderer;
 import com.example.superheroes.network.HeroDataSyncS2CPayload;
 import com.example.superheroes.network.LaserFiredS2CPayload;
+import com.example.superheroes.network.RepulsorBlastS2CPayload;
 import com.example.superheroes.network.RemoteHeroSkinS2CPayload;
 import com.example.superheroes.network.ResourceUpdateS2CPayload;
 import com.example.superheroes.network.ScreenShakeS2CPayload;
@@ -40,6 +42,9 @@ public final class ClientNetworking {
 
 		ClientPlayNetworking.registerGlobalReceiver(LaserFiredS2CPayload.TYPE, (payload, context) ->
 				context.client().execute(() -> LaserBeamRenderer.add(payload.start(), payload.end())));
+
+		ClientPlayNetworking.registerGlobalReceiver(RepulsorBlastS2CPayload.TYPE, (payload, context) ->
+				context.client().execute(() -> RepulsorBeamRenderer.add(payload.start(), payload.end())));
 
 		ClientPlayNetworking.registerGlobalReceiver(ScreenShakeS2CPayload.TYPE, (payload, context) ->
 				context.client().execute(() -> ScreenShakeManager.shake(payload.intensity(), payload.durationTicks())));

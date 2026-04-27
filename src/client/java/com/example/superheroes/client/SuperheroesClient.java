@@ -11,6 +11,7 @@ import com.example.superheroes.client.render.HeroSkinLayer;
 import com.example.superheroes.client.render.IronManEspRenderer;
 import com.example.superheroes.client.render.LaserBeamRenderer;
 import com.example.superheroes.client.render.LocalLaserOverlay;
+import com.example.superheroes.client.render.RepulsorBeamRenderer;
 import com.example.superheroes.client.render.lightning.SuperheroLightningRenderer;
 import com.example.superheroes.client.screen.BindingsScreen;
 import com.example.superheroes.network.ActivateAbilityC2SPayload;
@@ -35,6 +36,7 @@ public class SuperheroesClient implements ClientModInitializer {
 		ModKeys.init();
 		ClientNetworking.init();
 		LaserBeamRenderer.register();
+		RepulsorBeamRenderer.register();
 		LocalLaserOverlay.register();
 		IronManEspRenderer.register();
 		EntityRendererRegistry.register(EntityType.LIGHTNING_BOLT, SuperheroLightningRenderer::new);
