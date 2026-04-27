@@ -1,6 +1,7 @@
 package com.example.superheroes.client;
 
 import com.example.superheroes.hero.Hero;
+import com.example.superheroes.hero.HeroTheme;
 import com.example.superheroes.hero.Heroes;
 import com.example.superheroes.client.hud.ScreenFlashHud;
 import com.example.superheroes.transform.HeroData;
@@ -55,5 +56,13 @@ public final class ClientHeroState {
 		}
 		Hero hero = Heroes.get(data.heroId());
 		return hero != null ? hero.getManaMax() : 1f;
+	}
+
+	public static HeroTheme theme() {
+		if (!data.hasHero()) {
+			return HeroTheme.DEFAULT;
+		}
+		Hero hero = Heroes.get(data.heroId());
+		return hero != null ? hero.getTheme() : HeroTheme.DEFAULT;
 	}
 }

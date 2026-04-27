@@ -13,6 +13,10 @@ public final class AbilityRegistry {
 	public static final FlightAbility FLIGHT = new FlightAbility();
 	public static final EyeLasersAbility EYE_LASERS = new EyeLasersAbility();
 	public static final XRayAbility X_RAY = new XRayAbility();
+	public static final IronManFlightAbility IRON_MAN_FLIGHT = new IronManFlightAbility();
+	public static final SupersonicAbility SUPERSONIC = new SupersonicAbility();
+	public static final RepulsorAbility REPULSOR = new RepulsorAbility();
+	public static final BoxEspAbility BOX_ESP = new BoxEspAbility();
 
 	private AbilityRegistry() {
 	}
@@ -21,6 +25,10 @@ public final class AbilityRegistry {
 		register(FLIGHT);
 		register(EYE_LASERS);
 		register(X_RAY);
+		register(IRON_MAN_FLIGHT);
+		register(SUPERSONIC);
+		register(REPULSOR);
+		register(BOX_ESP);
 	}
 
 	public static void register(Ability ability) {

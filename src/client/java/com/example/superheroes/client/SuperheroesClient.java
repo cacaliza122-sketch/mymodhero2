@@ -8,6 +8,7 @@ import com.example.superheroes.client.hud.SunWindupHud;
 import com.example.superheroes.client.fx.ScreenShakeManager;
 import com.example.superheroes.client.network.ClientNetworking;
 import com.example.superheroes.client.render.HeroSkinLayer;
+import com.example.superheroes.client.render.IronManEspRenderer;
 import com.example.superheroes.client.render.LaserBeamRenderer;
 import com.example.superheroes.client.render.LocalLaserOverlay;
 import com.example.superheroes.client.render.lightning.SuperheroLightningRenderer;
@@ -35,6 +36,7 @@ public class SuperheroesClient implements ClientModInitializer {
 		ClientNetworking.init();
 		LaserBeamRenderer.register();
 		LocalLaserOverlay.register();
+		IronManEspRenderer.register();
 		EntityRendererRegistry.register(EntityType.LIGHTNING_BOLT, SuperheroLightningRenderer::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticles.TRANSFORM_SPARK, EndRodParticle.Provider::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticles.LASER_SPARK, EndRodParticle.Provider::new);

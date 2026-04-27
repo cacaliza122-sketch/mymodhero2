@@ -39,4 +39,8 @@ public interface Hero {
 
 	default void onLanded(ServerPlayer player, float fallDistance) {
 	}
+
+	default HeroTheme getTheme() {
+		return HeroTheme.DEFAULT;
+	}
 }
