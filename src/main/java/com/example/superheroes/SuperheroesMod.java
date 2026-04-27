@@ -10,6 +10,7 @@ import com.example.superheroes.item.ModItems;
 import com.example.superheroes.network.ModNetworking;
 import com.example.superheroes.particle.ModParticles;
 import com.example.superheroes.resource.ResourceController;
+import com.example.superheroes.sound.ModSounds;
 import com.example.superheroes.transform.HeroTransformService;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.EntityTrackingEvents;
@@ -30,6 +31,7 @@ public class SuperheroesMod implements ModInitializer {
 		ModItems.init();
 		ModItemGroups.init();
 		ModParticles.init();
+		ModSounds.init();
 		ModNetworking.init();
 		ResourceController.init();
 		com.example.superheroes.effect.MadnessFlightController.init();

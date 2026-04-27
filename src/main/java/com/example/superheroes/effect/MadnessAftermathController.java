@@ -4,6 +4,7 @@ import com.example.superheroes.ability.AbilityIds;
 import com.example.superheroes.ability.AbilityRegistry;
 import com.example.superheroes.attachment.ModAttachments;
 import com.example.superheroes.network.ModNetworking;
+import com.example.superheroes.sound.ModSounds;
 import com.example.superheroes.transform.HeroData;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.core.BlockPos;
@@ -11,6 +12,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -159,6 +161,15 @@ public final class MadnessAftermathController {
 			}
 		}
 		level.playSound(null, x, y, z, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.PLAYERS, 4.0f, 0.4f);
-		level.playSound(null, x, y, z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 0.7f);
+		level.playSound(null, x, y, z, randomThunderSound(level), SoundSource.PLAYERS, 3.0f, 0.7f);
+	}
+
+	private static SoundEvent randomThunderSound(Level level) {
+		int pick = level.getRandom().nextInt(3);
+		return switch (pick) {
+			case 0 -> ModSounds.LIGHTNING_THUNDER_ANIME;
+			case 1 -> ModSounds.LIGHTNING_THUNDER_LOUD;
+			default -> SoundEvents.LIGHTNING_BOLT_THUNDER;
+		};
 	}
 }
