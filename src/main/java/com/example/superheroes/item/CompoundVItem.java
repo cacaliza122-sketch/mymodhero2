@@ -29,9 +29,11 @@ public class CompoundVItem extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-		tooltip.add(Component.translatable("item.superheroes.compound_v.lore.line1").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+		TooltipFrame.openDivider(tooltip, ChatFormatting.LIGHT_PURPLE);
+		tooltip.add(TooltipFrame.flavor("item.superheroes.compound_v.lore.line1", ChatFormatting.LIGHT_PURPLE));
 		tooltip.add(Component.empty());
-		tooltip.add(Component.translatable("item.superheroes.compound_v.lore.usage").withStyle(ChatFormatting.AQUA));
+		tooltip.add(TooltipFrame.bullet("item.superheroes.compound_v.lore.usage", ChatFormatting.AQUA));
+		TooltipFrame.closeDivider(tooltip, ChatFormatting.LIGHT_PURPLE);
 	}
 
 	@Override

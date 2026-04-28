@@ -1,5 +1,6 @@
 package com.example.superheroes.client;
 
+import com.example.superheroes.client.hud.AbilitiesTooltipHud;
 import com.example.superheroes.client.hud.JarvisOverlayHud;
 import com.example.superheroes.client.hud.RadialMenuHud;
 import com.example.superheroes.client.hud.ReactorOverlayHud;
@@ -57,6 +58,7 @@ public class SuperheroesClient implements ClientModInitializer {
 			LowResourceVignetteHud.render(graphics, tracker);
 			JarvisOverlayHud.render(graphics, tracker);
 			ResourceBarHud.render(graphics, tracker);
+			AbilitiesTooltipHud.render(graphics, tracker);
 			RadialMenuHud.render(graphics, tracker);
 			ScreenFlashHud.render(graphics, tracker);
 			SunWindupHud.render(graphics, tracker);
@@ -65,6 +67,7 @@ public class SuperheroesClient implements ClientModInitializer {
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			ScreenShakeManager.tick();
+			AbilitiesTooltipHud.tick();
 			RadialMenuHud.clientTick(client);
 			while (ModKeys.BINDINGS.consumeClick()) {
 				if (client.player != null && ClientHeroState.data().hasHero()) {

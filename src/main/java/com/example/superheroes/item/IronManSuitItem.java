@@ -17,10 +17,12 @@ public class IronManSuitItem extends TransformationItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-		tooltip.add(Component.translatable("item.superheroes.iron_man_suit.lore.line1").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
-		tooltip.add(Component.translatable("item.superheroes.iron_man_suit.lore.line2").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
+		TooltipFrame.openDivider(tooltip, ChatFormatting.GOLD);
+		tooltip.add(TooltipFrame.flavor("item.superheroes.iron_man_suit.lore.line1", ChatFormatting.GOLD));
+		tooltip.add(TooltipFrame.flavor("item.superheroes.iron_man_suit.lore.line2", ChatFormatting.DARK_GRAY));
 		tooltip.add(Component.empty());
-		tooltip.add(Component.translatable("item.superheroes.iron_man_suit.lore.usage").withStyle(ChatFormatting.GOLD));
-		tooltip.add(Component.translatable("item.superheroes.iron_man_suit.lore.untransform").withStyle(ChatFormatting.RED));
+		tooltip.add(TooltipFrame.bullet("item.superheroes.iron_man_suit.lore.usage", ChatFormatting.AQUA));
+		tooltip.add(TooltipFrame.bullet("item.superheroes.iron_man_suit.lore.untransform", ChatFormatting.RED));
+		TooltipFrame.closeDivider(tooltip, ChatFormatting.GOLD);
 	}
 }

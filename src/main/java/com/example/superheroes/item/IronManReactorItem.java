@@ -15,8 +15,10 @@ public class IronManReactorItem extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-		tooltip.add(Component.translatable("item.superheroes.iron_man_reactor.lore.line1").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+		TooltipFrame.openDivider(tooltip, ChatFormatting.AQUA);
+		tooltip.add(TooltipFrame.flavor("item.superheroes.iron_man_reactor.lore.line1", ChatFormatting.AQUA));
 		tooltip.add(Component.empty());
-		tooltip.add(Component.translatable("item.superheroes.iron_man_reactor.lore.usage").withStyle(ChatFormatting.GOLD));
+		tooltip.add(TooltipFrame.bullet("item.superheroes.iron_man_reactor.lore.usage", ChatFormatting.GOLD));
+		TooltipFrame.closeDivider(tooltip, ChatFormatting.AQUA);
 	}
 }
