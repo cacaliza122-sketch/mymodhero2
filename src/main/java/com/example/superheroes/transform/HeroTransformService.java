@@ -72,6 +72,14 @@ public final class HeroTransformService {
 		if (isOnCooldown(player)) {
 			return false;
 		}
+		return doUntransform(player, true);
+	}
+
+	public static boolean forceUntransform(ServerPlayer player) {
+		return doUntransform(player, false);
+	}
+
+	private static boolean doUntransform(ServerPlayer player, boolean playFx) {
 		HeroData data = player.getAttachedOrCreate(ModAttachments.HERO_DATA);
 		if (!data.hasHero()) {
 			return false;
@@ -81,12 +89,15 @@ public final class HeroTransformService {
 			current.removePassives(player);
 			deactivateAll(player, data);
 		}
+		com.example.superheroes.effect.UnibeamController.clearState(player.getUUID());
 		HeroData updated = data.withHero(null).withResources(0f, 0f).clearActive();
 		player.setAttached(ModAttachments.HERO_DATA, updated);
 		player.refreshDimensions();
 		ModNetworking.syncHeroData(player, updated);
 		ModNetworking.broadcastRemoteHeroSkin(player);
-		playTransformFx(player, false);
+		if (playFx) {
+			playTransformFx(player, false);
+		}
 		markTransformed(player);
 		return true;
 	}
