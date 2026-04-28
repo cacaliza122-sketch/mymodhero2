@@ -21,7 +21,7 @@ public abstract class LocalPlayerFlightMixin {
 	private static final double MIN_SPEED_MUL = 0.5;
 	private static final double MADNESS_SPEED_MUL = 1.5;
 	private static final double IRON_MAN_BASE_MUL = 0.56;
-	private static final double SUPERSONIC_MUL = 1.0;
+	private static final double SUPERSONIC_MUL = 1.6;
 	private static final double FRICTION_HORIZONTAL = 0.92;
 	private static final double FRICTION_VERTICAL = 0.90;
 
