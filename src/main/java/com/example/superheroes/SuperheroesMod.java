@@ -35,7 +35,6 @@ public class SuperheroesMod implements ModInitializer {
 		ModSounds.init();
 		ModNetworking.init();
 		ResourceController.init();
-		com.example.superheroes.effect.IronManEnergyBalancer.init();
 		com.example.superheroes.effect.MadnessFlightController.init();
 		com.example.superheroes.effect.MadnessAftermathController.init();
 		com.example.superheroes.effect.UnibeamController.init();

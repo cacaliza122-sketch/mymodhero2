@@ -1,6 +1,9 @@
 package com.example.superheroes.ability;
 
+import com.example.superheroes.attachment.ModAttachments;
+import com.example.superheroes.network.ModNetworking;
 import com.example.superheroes.particle.ModParticles;
+import com.example.superheroes.transform.HeroData;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -12,6 +15,9 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
 
 public final class IronManFlightAbility implements Ability {
+	private static final float SOFT_FLOOR = 500f;
+	private static final float OVERFLOW_DRAIN_PER_TICK = 5f;
+
 	@Override
 	public ResourceLocation getId() {
 		return AbilityIds.IRON_MAN_FLIGHT;
@@ -49,6 +55,14 @@ public final class IronManFlightAbility implements Ability {
 	public void onTickActive(ServerPlayer player) {
 		if (!player.isFallFlying()) {
 			player.startFallFlying();
+		}
+		HeroData data = player.getAttachedOrCreate(ModAttachments.HERO_DATA);
+		float energy = data.energy();
+		if (energy > SOFT_FLOOR) {
+			float newEnergy = Math.max(SOFT_FLOOR, energy - OVERFLOW_DRAIN_PER_TICK);
+			HeroData updated = data.withResources(newEnergy, data.mana());
+			player.setAttached(ModAttachments.HERO_DATA, updated);
+			ModNetworking.syncResources(player, updated);
 		}
 		ServerLevel level = player.serverLevel();
 		Vec3 pos = player.position();
