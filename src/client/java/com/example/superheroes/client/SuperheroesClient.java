@@ -1,6 +1,8 @@
 package com.example.superheroes.client;
 
+import com.example.superheroes.client.hud.JarvisOverlayHud;
 import com.example.superheroes.client.hud.RadialMenuHud;
+import com.example.superheroes.client.hud.ReactorOverlayHud;
 import com.example.superheroes.client.hud.ResourceBarHud;
 import com.example.superheroes.client.hud.LowResourceVignetteHud;
 import com.example.superheroes.client.hud.ScreenFlashHud;
@@ -53,10 +55,12 @@ public class SuperheroesClient implements ClientModInitializer {
 
 		HudRenderCallback.EVENT.register((graphics, tracker) -> {
 			LowResourceVignetteHud.render(graphics, tracker);
+			JarvisOverlayHud.render(graphics, tracker);
 			ResourceBarHud.render(graphics, tracker);
 			RadialMenuHud.render(graphics, tracker);
 			ScreenFlashHud.render(graphics, tracker);
 			SunWindupHud.render(graphics, tracker);
+			ReactorOverlayHud.render(graphics, tracker);
 		});
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {

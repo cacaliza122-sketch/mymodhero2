@@ -40,6 +40,8 @@ public class SuperheroesMod implements ModInitializer {
 		com.example.superheroes.effect.UnibeamController.init();
 		com.example.superheroes.effect.HeroLandingTracker.init();
 		com.example.superheroes.effect.HeroEquipmentLock.init();
+		com.example.superheroes.effect.IronManReactorTracker.init();
+		com.example.superheroes.effect.IronManAutoEjectController.init();
 		SuperheroesCommands.init();
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {

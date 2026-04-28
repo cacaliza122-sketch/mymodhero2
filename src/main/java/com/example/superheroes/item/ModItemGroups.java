@@ -22,6 +22,7 @@ public final class ModItemGroups {
 				output.accept(ModItems.IRON_MAN_SUIT);
 				output.accept(ModItems.COMPOUND_V);
 				output.accept(ModItems.MILK_BOTTLE);
+				output.accept(ModItems.IRON_MAN_REACTOR);
 			})
 			.build();
 
