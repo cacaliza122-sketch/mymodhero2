@@ -36,6 +36,7 @@ public class SuperheroesMod implements ModInitializer {
 		ResourceController.init();
 		com.example.superheroes.effect.MadnessFlightController.init();
 		com.example.superheroes.effect.MadnessAftermathController.init();
+		com.example.superheroes.effect.UnibeamController.init();
 		com.example.superheroes.effect.HeroLandingTracker.init();
 		SuperheroesCommands.init();
 
