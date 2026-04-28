@@ -37,7 +37,7 @@ public final class AbilityRouter {
 		}
 		float cost = ability.costOnActivate();
 		if (cost > 0f) {
-			if (!abilityId.equals(AbilityIds.UNIBEAM)) {
+			if (!abilityId.equals(AbilityIds.UNIBEAM) && hero.getAbilities().contains(AbilityIds.UNIBEAM)) {
 				ResourceKind binding = data.binding(abilityId, hero.getDefaultBinding(abilityId));
 				if (binding == ResourceKind.ENERGY && data.energy() < cost + 100f) {
 					return;
