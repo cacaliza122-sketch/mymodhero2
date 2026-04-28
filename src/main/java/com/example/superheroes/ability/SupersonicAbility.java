@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Abilities;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
 
 public final class SupersonicAbility implements Ability {
@@ -31,20 +32,16 @@ public final class SupersonicAbility implements Ability {
 
 	@Override
 	public float costPerTick() {
-		return 5.0f;
+		return 3.0f;
 	}
 
 	@Override
 	public boolean tryActivate(ServerPlayer player) {
-		HeroData data = player.getAttachedOrCreate(ModAttachments.HERO_DATA);
-		if (!data.isActive(AbilityIds.IRON_MAN_FLIGHT)) {
-			Ability flight = AbilityRegistry.get(AbilityIds.IRON_MAN_FLIGHT);
-			if (flight != null && flight.tryActivate(player)) {
-				HeroData updated = data.withActive(AbilityIds.IRON_MAN_FLIGHT, true);
-				player.setAttached(ModAttachments.HERO_DATA, updated);
-				ModNetworking.syncHeroData(player, updated);
-			}
-		}
+		Abilities a = player.getAbilities();
+		a.mayfly = true;
+		a.flying = true;
+		player.onUpdateAbilities();
+		player.startFallFlying();
 		ServerLevel level = player.serverLevel();
 		level.playSound(null, player.getX(), player.getY(), player.getZ(),
 				SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.PLAYERS, 1.2f, 1.6f);
@@ -53,13 +50,19 @@ public final class SupersonicAbility implements Ability {
 
 	@Override
 	public void onTickActive(ServerPlayer player) {
+		if (!player.isFallFlying()) {
+			player.startFallFlying();
+		}
 		Abilities a = player.getAbilities();
 		if (!a.flying) {
 			a.flying = true;
 			player.onUpdateAbilities();
 		}
-		if (!player.isFallFlying()) {
-			player.startFallFlying();
+		HeroData data = player.getAttachedOrCreate(ModAttachments.HERO_DATA);
+		if (data.energy() < IronManFlightAbility.ENERGY_FLOOR) {
+			HeroData updated = data.withResources(IronManFlightAbility.ENERGY_FLOOR, data.mana());
+			player.setAttached(ModAttachments.HERO_DATA, updated);
+			ModNetworking.syncResources(player, updated);
 		}
 		player.fallDistance = 0f;
 
@@ -82,5 +85,12 @@ public final class SupersonicAbility implements Ability {
 
 	@Override
 	public void onDeactivate(ServerPlayer player) {
+		Abilities a = player.getAbilities();
+		a.flying = false;
+		if (player.gameMode.getGameModeForPlayer() != GameType.CREATIVE) {
+			a.mayfly = false;
+		}
+		player.onUpdateAbilities();
+		player.stopFallFlying();
 	}
 }

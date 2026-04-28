@@ -15,8 +15,7 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
 
 public final class IronManFlightAbility implements Ability {
-	private static final float SOFT_FLOOR = 500f;
-	private static final float OVERFLOW_DRAIN_PER_TICK = 5f;
+	public static final float ENERGY_FLOOR = 100f;
 
 	@Override
 	public ResourceLocation getId() {
@@ -57,10 +56,8 @@ public final class IronManFlightAbility implements Ability {
 			player.startFallFlying();
 		}
 		HeroData data = player.getAttachedOrCreate(ModAttachments.HERO_DATA);
-		float energy = data.energy();
-		if (energy > SOFT_FLOOR) {
-			float newEnergy = Math.max(SOFT_FLOOR, energy - OVERFLOW_DRAIN_PER_TICK);
-			HeroData updated = data.withResources(newEnergy, data.mana());
+		if (data.energy() < ENERGY_FLOOR) {
+			HeroData updated = data.withResources(ENERGY_FLOOR, data.mana());
 			player.setAttached(ModAttachments.HERO_DATA, updated);
 			ModNetworking.syncResources(player, updated);
 		}

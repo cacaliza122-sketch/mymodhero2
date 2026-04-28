@@ -12,6 +12,7 @@ import com.example.superheroes.network.HeroDataSyncS2CPayload;
 import com.example.superheroes.network.LaserFiredS2CPayload;
 import com.example.superheroes.network.RepulsorBlastS2CPayload;
 import com.example.superheroes.network.RemoteHeroSkinS2CPayload;
+import com.example.superheroes.ability.AbilityIds;
 import com.example.superheroes.network.ResourceUpdateS2CPayload;
 import com.example.superheroes.network.ScreenShakeS2CPayload;
 import com.example.superheroes.transform.HeroData;
@@ -35,6 +36,15 @@ public final class ClientNetworking {
 						if (previous.hasHero() != data.hasHero()
 								|| (data.hasHero() && !data.heroId().equals(previous.heroId()))) {
 							self.refreshDimensions();
+						}
+						boolean wasFlight = previous.isActive(AbilityIds.FLIGHT)
+								|| previous.isActive(AbilityIds.IRON_MAN_FLIGHT)
+								|| previous.isActive(AbilityIds.SUPERSONIC);
+						boolean isFlight = data.isActive(AbilityIds.FLIGHT)
+								|| data.isActive(AbilityIds.IRON_MAN_FLIGHT)
+								|| data.isActive(AbilityIds.SUPERSONIC);
+						if (!wasFlight && isFlight && !self.isFallFlying()) {
+							self.startFallFlying();
 						}
 					}
 				}));

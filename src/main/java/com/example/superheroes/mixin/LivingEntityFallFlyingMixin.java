@@ -19,7 +19,7 @@ public abstract class LivingEntityFallFlyingMixin {
 			return;
 		}
 		HeroData data = player.getAttachedOrCreate(ModAttachments.HERO_DATA);
-		if (data.hasHero() && (data.isActive(AbilityIds.FLIGHT) || data.isActive(AbilityIds.IRON_MAN_FLIGHT))) {
+		if (data.hasHero() && (data.isActive(AbilityIds.FLIGHT) || data.isActive(AbilityIds.IRON_MAN_FLIGHT) || data.isActive(AbilityIds.SUPERSONIC))) {
 			if (!player.isFallFlying()) {
 				player.startFallFlying();
 			}
