@@ -36,8 +36,16 @@ public final class AbilityRouter {
 			return;
 		}
 		float cost = ability.costOnActivate();
-		if (cost > 0f && !ResourceController.tryConsume(player, abilityId, cost)) {
-			return;
+		if (cost > 0f) {
+			if (!abilityId.equals(AbilityIds.UNIBEAM)) {
+				ResourceKind binding = data.binding(abilityId, hero.getDefaultBinding(abilityId));
+				if (binding == ResourceKind.ENERGY && data.energy() < cost + 100f) {
+					return;
+				}
+			}
+			if (!ResourceController.tryConsume(player, abilityId, cost)) {
+				return;
+			}
 		}
 		boolean ok = ability.tryActivate(player);
 		if (!ok) {
