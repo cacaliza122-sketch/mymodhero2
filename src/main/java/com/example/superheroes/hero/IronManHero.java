@@ -4,6 +4,7 @@ import com.example.superheroes.ModId;
 import com.example.superheroes.ability.AbilityIds;
 import com.example.superheroes.physics.ShockwaveUtil;
 import com.example.superheroes.resource.ResourceKind;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -84,20 +85,54 @@ public final class IronManHero implements Hero {
 	}
 
 	@Override
-	public void onLanded(ServerPlayer player, float fallDistance) {
-		if (fallDistance < 3.0f) {
-			return;
-		}
-		float scaled = Math.min(fallDistance, 60.0f);
-		double radius = 2.0 + scaled * 0.25;
-		float damage = 2.0f + scaled * 0.20f;
+	public void onLanded(ServerPlayer player, LandingImpact impact) {
+		float intensity = impact.intensity();
+		float scale = 0.30f + intensity * 1.20f;
+		double radius = 2.0 + scale * 5.5;
+		float damage = 2.0f + scale * 7.0f;
 		ShockwaveUtil.detonate(player, player.position(), radius, damage, false);
+
 		ServerLevel level = player.serverLevel();
-		level.playSound(null, player.getX(), player.getY(), player.getZ(),
-				SoundEvents.IRON_GOLEM_DEATH, SoundSource.PLAYERS, 0.9f, 0.6f);
-		level.playSound(null, player.getX(), player.getY(), player.getZ(),
-				SoundEvents.IRON_GOLEM_HURT, SoundSource.PLAYERS, 1.2f, 0.7f);
-		level.playSound(null, player.getX(), player.getY(), player.getZ(),
-				SoundEvents.NETHERITE_BLOCK_HIT, SoundSource.PLAYERS, 1.4f, 0.5f);
+		double cx = player.getX();
+		double cy = player.getY();
+		double cz = player.getZ();
+
+		switch (impact.tier()) {
+			case WEAK -> {
+				level.playSound(null, cx, cy, cz, SoundEvents.NETHERITE_BLOCK_HIT, SoundSource.PLAYERS, 0.9f, 1.3f);
+				level.playSound(null, cx, cy, cz, SoundEvents.IRON_GOLEM_STEP, SoundSource.PLAYERS, 1.0f, 1.1f);
+				level.sendParticles(ParticleTypes.SMOKE, cx, cy + 0.1, cz, 8, 0.5, 0.05, 0.5, 0.02);
+			}
+			case NORMAL -> {
+				level.playSound(null, cx, cy, cz, SoundEvents.IRON_GOLEM_HURT, SoundSource.PLAYERS, 1.0f, 0.95f);
+				level.playSound(null, cx, cy, cz, SoundEvents.NETHERITE_BLOCK_HIT, SoundSource.PLAYERS, 1.3f, 0.8f);
+				level.playSound(null, cx, cy, cz, SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 0.6f, 1.6f);
+				level.sendParticles(ParticleTypes.POOF, cx, cy + 0.1, cz, 22, radius * 0.4, 0.15, radius * 0.4, 0.05);
+				level.sendParticles(ParticleTypes.SMOKE, cx, cy + 0.1, cz, 18, radius * 0.35, 0.1, radius * 0.35, 0.04);
+			}
+			case STRONG -> {
+				level.playSound(null, cx, cy, cz, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.PLAYERS, 1.3f, 0.85f);
+				level.playSound(null, cx, cy, cz, SoundEvents.IRON_GOLEM_DEATH, SoundSource.PLAYERS, 1.2f, 0.75f);
+				level.playSound(null, cx, cy, cz, SoundEvents.NETHERITE_BLOCK_HIT, SoundSource.PLAYERS, 1.6f, 0.6f);
+				level.playSound(null, cx, cy, cz, SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 0.9f, 1.2f);
+				level.sendParticles(ParticleTypes.LARGE_SMOKE, cx, cy + 0.1, cz, 40, radius * 0.5, 0.2, radius * 0.5, 0.06);
+				level.sendParticles(ParticleTypes.POOF, cx, cy + 0.1, cz, 32, radius * 0.45, 0.18, radius * 0.45, 0.08);
+				level.sendParticles(ParticleTypes.SWEEP_ATTACK, cx, cy + 0.4, cz, 3, radius * 0.4, 0.1, radius * 0.4, 0.0);
+				level.sendParticles(ParticleTypes.ELECTRIC_SPARK, cx, cy + 0.3, cz, 30, radius * 0.4, 0.15, radius * 0.4, 0.15);
+			}
+			case EPIC -> {
+				level.playSound(null, cx, cy, cz, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.PLAYERS, 1.8f, 0.55f);
+				level.playSound(null, cx, cy, cz, SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 1.2f, 1.1f);
+				level.playSound(null, cx, cy, cz, SoundEvents.IRON_GOLEM_DEATH, SoundSource.PLAYERS, 1.5f, 0.6f);
+				level.playSound(null, cx, cy, cz, SoundEvents.NETHERITE_BLOCK_HIT, SoundSource.PLAYERS, 2.0f, 0.5f);
+				level.playSound(null, cx, cy, cz, SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 1.3f, 0.9f);
+				level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, cx, cy + 0.3, cz, 2, radius * 0.35, 0.2, radius * 0.35, 0.0);
+				level.sendParticles(ParticleTypes.LARGE_SMOKE, cx, cy + 0.1, cz, 65, radius * 0.55, 0.3, radius * 0.55, 0.1);
+				level.sendParticles(ParticleTypes.FLASH, cx, cy + 0.8, cz, 1, 0.0, 0.0, 0.0, 0.0);
+				level.sendParticles(ParticleTypes.SWEEP_ATTACK, cx, cy + 0.4, cz, 6, radius * 0.5, 0.1, radius * 0.5, 0.0);
+				level.sendParticles(ParticleTypes.ELECTRIC_SPARK, cx, cy + 0.3, cz, 60, radius * 0.5, 0.2, radius * 0.5, 0.25);
+				level.sendParticles(ParticleTypes.FIREWORK, cx, cy + 0.4, cz, 30, radius * 0.45, 0.2, radius * 0.45, 0.1);
+			}
+		}
 	}
 }
