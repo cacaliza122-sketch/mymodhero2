@@ -16,5 +16,31 @@
 				"stream": true
 			}
 		]
+	},
+	"unibeam.charge": {
+		"subtitle": "subtitles.superheroes.unibeam.charge",
+		"sounds": [
+			{
+				"name": "superheroes:unibeam/unibeam_charge",
+				"stream": true
+			}
+		]
+	},
+	"unibeam.beam": {
+		"subtitle": "subtitles.superheroes.unibeam.beam",
+		"sounds": [
+			{
+				"name": "superheroes:unibeam/unibeam_beam",
+				"stream": true
+			}
+		]
+	},
+	"unibeam.blast": {
+		"subtitle": "subtitles.superheroes.unibeam.blast",
+		"sounds": [
+			{
+				"name": "superheroes:unibeam/unibeam_blast"
+			}
+		]
 	}
 }
