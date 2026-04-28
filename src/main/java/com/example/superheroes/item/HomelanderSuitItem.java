@@ -17,10 +17,12 @@ public class HomelanderSuitItem extends TransformationItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-		tooltip.add(Component.translatable("item.superheroes.homelander_suit.lore.line1").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
-		tooltip.add(Component.translatable("item.superheroes.homelander_suit.lore.line2").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
+		TooltipFrame.openDivider(tooltip, ChatFormatting.DARK_RED);
+		tooltip.add(TooltipFrame.flavor("item.superheroes.homelander_suit.lore.line1", ChatFormatting.RED));
+		tooltip.add(TooltipFrame.flavor("item.superheroes.homelander_suit.lore.line2", ChatFormatting.DARK_GRAY));
 		tooltip.add(Component.empty());
-		tooltip.add(Component.translatable("item.superheroes.homelander_suit.lore.usage").withStyle(ChatFormatting.GOLD));
-		tooltip.add(Component.translatable("item.superheroes.homelander_suit.lore.untransform").withStyle(ChatFormatting.YELLOW));
+		tooltip.add(TooltipFrame.bullet("item.superheroes.homelander_suit.lore.usage", ChatFormatting.GOLD));
+		tooltip.add(TooltipFrame.bullet("item.superheroes.homelander_suit.lore.untransform", ChatFormatting.YELLOW));
+		TooltipFrame.closeDivider(tooltip, ChatFormatting.DARK_RED);
 	}
 }

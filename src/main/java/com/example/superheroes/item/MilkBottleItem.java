@@ -32,10 +32,12 @@ public class MilkBottleItem extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-		tooltip.add(Component.translatable("item.superheroes.milk_bottle.lore.line1").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+		TooltipFrame.openDivider(tooltip, ChatFormatting.WHITE);
+		tooltip.add(TooltipFrame.flavor("item.superheroes.milk_bottle.lore.line1", ChatFormatting.WHITE));
 		tooltip.add(Component.empty());
-		tooltip.add(Component.translatable("item.superheroes.milk_bottle.lore.usage").withStyle(ChatFormatting.RED));
-		tooltip.add(Component.translatable("item.superheroes.milk_bottle.lore.warning").withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC));
+		tooltip.add(TooltipFrame.bullet("item.superheroes.milk_bottle.lore.usage", ChatFormatting.RED));
+		tooltip.add(TooltipFrame.bulletWarn("item.superheroes.milk_bottle.lore.warning", ChatFormatting.DARK_RED));
+		TooltipFrame.closeDivider(tooltip, ChatFormatting.WHITE);
 	}
 
 	@Override
