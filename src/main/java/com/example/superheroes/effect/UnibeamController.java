@@ -2,6 +2,7 @@ package com.example.superheroes.effect;
 
 import com.example.superheroes.attachment.ModAttachments;
 import com.example.superheroes.network.ModNetworking;
+import com.example.superheroes.particle.ModParticles;
 import com.example.superheroes.transform.HeroData;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.core.BlockPos;
@@ -98,6 +99,14 @@ public final class UnibeamController {
 		return charging.containsKey(id) || stunned.containsKey(id);
 	}
 
+	public static boolean isCharging(ServerPlayer player) {
+		return charging.containsKey(player.getUUID());
+	}
+
+	public static boolean isStunned(ServerPlayer player) {
+		return stunned.containsKey(player.getUUID());
+	}
+
 	private static void tickCharging(ServerPlayer player) {
 		ChargeState state = charging.get(player.getUUID());
 		if (state == null) {
@@ -116,7 +125,7 @@ public final class UnibeamController {
 			double sx = chest.x + Math.cos(a) * dist;
 			double sy = chest.y + dy;
 			double sz = chest.z + Math.sin(a) * dist;
-			level.sendParticles(ParticleTypes.END_ROD,
+			level.sendParticles(ModParticles.UNIBEAM_SPARK,
 					sx, sy, sz, 1,
 					(chest.x - sx) * 0.4, (chest.y - sy) * 0.4, (chest.z - sz) * 0.4, 0.0);
 		}
@@ -228,7 +237,7 @@ public final class UnibeamController {
 		for (int i = 0; i < 80; i++) {
 			double f = level.getRandom().nextDouble();
 			Vec3 p = chest.add(dir.scale(f * BEAM_RANGE));
-			level.sendParticles(ParticleTypes.END_ROD,
+			level.sendParticles(ModParticles.UNIBEAM_SPARK,
 					p.x, p.y, p.z, 4,
 					0.3, 0.3, 0.3,
 					0.05 + 0.3 * f);
