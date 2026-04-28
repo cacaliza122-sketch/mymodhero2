@@ -29,7 +29,7 @@ public final class IronManFlightAbility implements Ability {
 
 	@Override
 	public float costPerTick() {
-		return 2.5f;
+		return 0f;
 	}
 
 	@Override
