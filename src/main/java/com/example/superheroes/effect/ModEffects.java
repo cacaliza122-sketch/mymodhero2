@@ -18,6 +18,11 @@ public final class ModEffects {
 			new MadnessAftermathMobEffect(MobEffectCategory.NEUTRAL, 0xFFE680)
 	);
 
+	public static final Holder<MobEffect> SUPERHERO_WEAKNESS = Registry.registerForHolder(
+			BuiltInRegistries.MOB_EFFECT, ModId.of("superhero_weakness"),
+			new SuperheroWeaknessEffect(MobEffectCategory.HARMFUL, 0xFF7FFF30)
+	);
+
 	private ModEffects() {
 	}
 
