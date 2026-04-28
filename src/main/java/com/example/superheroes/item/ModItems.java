@@ -32,6 +32,21 @@ public final class ModItems {
 			new IronManReactorItem(new Item.Properties().stacksTo(4).rarity(Rarity.RARE))
 	);
 
+	public static final UraniumIsotopeItem URANIUM_ISOTOPE = register(
+			"uranium_isotope",
+			new UraniumIsotopeItem(new Item.Properties().stacksTo(16).rarity(Rarity.RARE))
+	);
+
+	public static final UraniumDaggerItem URANIUM_DAGGER = register(
+			"uranium_dagger",
+			new UraniumDaggerItem(new Item.Properties().stacksTo(1).durability(250).rarity(Rarity.EPIC))
+	);
+
+	public static final RegulusSuitItem REGULUS_SUIT = register(
+			"regulus_suit",
+			new RegulusSuitItem(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.EPIC))
+	);
+
 	private ModItems() {
 	}
 

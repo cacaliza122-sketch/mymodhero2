@@ -19,6 +19,10 @@ public final class AbilityRegistry {
 	public static final BoxEspAbility BOX_ESP = new BoxEspAbility();
 	public static final UnibeamAbility UNIBEAM = new UnibeamAbility();
 
+	public static final LionHeartAbility LION_HEART = new LionHeartAbility();
+	public static final ObjectProjectileAbility OBJECT_PROJECTILE = new ObjectProjectileAbility();
+	public static final LionRoarAbility LION_ROAR = new LionRoarAbility();
+
 	private AbilityRegistry() {
 	}
 
@@ -31,6 +35,9 @@ public final class AbilityRegistry {
 		register(REPULSOR);
 		register(BOX_ESP);
 		register(UNIBEAM);
+		register(LION_HEART);
+		register(OBJECT_PROJECTILE);
+		register(LION_ROAR);
 	}
 
 	public static void register(Ability ability) {

@@ -23,6 +23,9 @@ public final class ModItemGroups {
 				output.accept(ModItems.COMPOUND_V);
 				output.accept(ModItems.MILK_BOTTLE);
 				output.accept(ModItems.IRON_MAN_REACTOR);
+				output.accept(ModItems.URANIUM_ISOTOPE);
+				output.accept(ModItems.URANIUM_DAGGER);
+				output.accept(ModItems.REGULUS_SUIT);
 			})
 			.build();
 

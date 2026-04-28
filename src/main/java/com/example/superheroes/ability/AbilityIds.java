@@ -14,6 +14,10 @@ public final class AbilityIds {
 	public static final ResourceLocation BOX_ESP = ModId.of("box_esp");
 	public static final ResourceLocation UNIBEAM = ModId.of("unibeam");
 
+	public static final ResourceLocation LION_HEART = ModId.of("lion_heart");
+	public static final ResourceLocation OBJECT_PROJECTILE = ModId.of("object_projectile");
+	public static final ResourceLocation LION_ROAR = ModId.of("lion_roar");
+
 	private AbilityIds() {
 	}
 }
