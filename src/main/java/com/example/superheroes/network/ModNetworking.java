@@ -29,6 +29,7 @@ public final class ModNetworking {
 		PayloadTypeRegistry.playS2C().register(RepulsorBlastS2CPayload.TYPE, RepulsorBlastS2CPayload.STREAM_CODEC);
 		PayloadTypeRegistry.playS2C().register(ScreenShakeS2CPayload.TYPE, ScreenShakeS2CPayload.STREAM_CODEC);
 		PayloadTypeRegistry.playS2C().register(RemoteHeroSkinS2CPayload.TYPE, RemoteHeroSkinS2CPayload.STREAM_CODEC);
+		PayloadTypeRegistry.playS2C().register(ReactorStateS2CPayload.TYPE, ReactorStateS2CPayload.STREAM_CODEC);
 
 		ServerPlayNetworking.registerGlobalReceiver(ActivateAbilityC2SPayload.TYPE, (payload, context) -> {
 			ServerPlayer player = context.player();

@@ -27,6 +27,11 @@ public final class ModItems {
 			new MilkBottleItem(new Item.Properties().stacksTo(8).rarity(Rarity.RARE))
 	);
 
+	public static final IronManReactorItem IRON_MAN_REACTOR = register(
+			"iron_man_reactor",
+			new IronManReactorItem(new Item.Properties().stacksTo(4).rarity(Rarity.RARE))
+	);
+
 	private ModItems() {
 	}
 
