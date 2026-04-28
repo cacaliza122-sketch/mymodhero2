@@ -5,6 +5,7 @@
 	"mixins": [
 		"LightningBoltAccessor",
 		"PlayerDimensionsMixin",
+		"PlayerFlightPoseMixin",
 		"LivingEntityFallDamageMixin",
 		"LivingEntityFallFlyingMixin"
 	],

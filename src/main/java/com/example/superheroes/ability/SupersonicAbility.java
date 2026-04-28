@@ -1,9 +1,6 @@
 package com.example.superheroes.ability;
 
-import com.example.superheroes.attachment.ModAttachments;
-import com.example.superheroes.network.ModNetworking;
 import com.example.superheroes.particle.ModParticles;
-import com.example.superheroes.transform.HeroData;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -57,12 +54,6 @@ public final class SupersonicAbility implements Ability {
 		if (!a.flying) {
 			a.flying = true;
 			player.onUpdateAbilities();
-		}
-		HeroData data = player.getAttachedOrCreate(ModAttachments.HERO_DATA);
-		if (data.energy() < IronManFlightAbility.ENERGY_FLOOR) {
-			HeroData updated = data.withResources(IronManFlightAbility.ENERGY_FLOOR, data.mana());
-			player.setAttached(ModAttachments.HERO_DATA, updated);
-			ModNetworking.syncResources(player, updated);
 		}
 		player.fallDistance = 0f;
 
