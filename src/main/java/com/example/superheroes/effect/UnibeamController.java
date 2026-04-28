@@ -278,6 +278,13 @@ public final class UnibeamController {
 		player.resetFallDistance();
 		player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 250, false, false, false));
 		player.addEffect(new MobEffectInstance(MobEffects.JUMP, 5, 128, false, false, false));
+		player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 5, 0, false, false, false));
+	}
+
+	public static void clearState(UUID id) {
+		charging.remove(id);
+		firing.remove(id);
+		stunned.remove(id);
 	}
 
 	private static Vec3 findGroundAnchor(ServerPlayer player) {

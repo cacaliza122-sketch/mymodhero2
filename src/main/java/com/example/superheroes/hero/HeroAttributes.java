@@ -18,14 +18,14 @@ public final class HeroAttributes {
 	public static final ResourceLocation IRON_MAN_KNOCKBACK = ModId.of("modifiers/iron_man/knockback_resistance");
 
 	public static final AttributeModifierSet HOMELANDER = AttributeModifierSet.builder()
-			.add(Attributes.ARMOR, HOMELANDER_ARMOR, 10.0, AttributeModifier.Operation.ADD_VALUE)
+			.add(Attributes.ARMOR, HOMELANDER_ARMOR, 20.0, AttributeModifier.Operation.ADD_VALUE)
 			.add(Attributes.ARMOR_TOUGHNESS, HOMELANDER_TOUGHNESS, 2.0, AttributeModifier.Operation.ADD_VALUE)
 			.add(Attributes.ATTACK_DAMAGE, HOMELANDER_DAMAGE, 6.0, AttributeModifier.Operation.ADD_VALUE)
 			.add(Attributes.MOVEMENT_SPEED, HOMELANDER_SPEED, 0.20, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)
 			.build();
 
 	public static final AttributeModifierSet IRON_MAN = AttributeModifierSet.builder()
-			.add(Attributes.ARMOR, IRON_MAN_ARMOR, 12.0, AttributeModifier.Operation.ADD_VALUE)
+			.add(Attributes.ARMOR, IRON_MAN_ARMOR, 25.0, AttributeModifier.Operation.ADD_VALUE)
 			.add(Attributes.ARMOR_TOUGHNESS, IRON_MAN_TOUGHNESS, 4.0, AttributeModifier.Operation.ADD_VALUE)
 			.add(Attributes.ATTACK_DAMAGE, IRON_MAN_DAMAGE, 4.0, AttributeModifier.Operation.ADD_VALUE)
 			.add(Attributes.MOVEMENT_SPEED, IRON_MAN_SPEED, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)

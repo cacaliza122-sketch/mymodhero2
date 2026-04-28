@@ -13,6 +13,7 @@ import com.example.superheroes.resource.ResourceController;
 import com.example.superheroes.sound.ModSounds;
 import com.example.superheroes.transform.HeroTransformService;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.EntityTrackingEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,6 +44,12 @@ public class SuperheroesMod implements ModInitializer {
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			HeroTransformService.onPlayerJoin(handler.getPlayer());
+		});
+
+		ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
+			if (entity instanceof ServerPlayer serverPlayer) {
+				HeroTransformService.forceUntransform(serverPlayer);
+			}
 		});
 
 		EntityTrackingEvents.START_TRACKING.register((tracked, observer) -> {
