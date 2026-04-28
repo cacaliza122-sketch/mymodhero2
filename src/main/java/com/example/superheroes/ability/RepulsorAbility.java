@@ -1,6 +1,7 @@
 package com.example.superheroes.ability;
 
 import com.example.superheroes.network.ModNetworking;
+import com.example.superheroes.particle.ModParticles;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -63,12 +64,14 @@ public final class RepulsorAbility implements Ability {
 		Vec3 hand = eye.add(dir.scale(0.5));
 		ModNetworking.broadcastRepulsor(player, hand, actualEnd);
 
-		level.sendParticles(ParticleTypes.FLAME,
-				hand.x, hand.y, hand.z, 14, 0.25, 0.25, 0.25, 0.05);
+		level.sendParticles(ModParticles.REPULSOR_SPARK,
+				hand.x, hand.y, hand.z, 18, 0.25, 0.25, 0.25, 0.05);
 		level.sendParticles(ParticleTypes.SMOKE,
 				hand.x, hand.y, hand.z, 8, 0.2, 0.2, 0.2, 0.02);
+		level.sendParticles(ModParticles.REPULSOR_SPARK,
+				actualEnd.x, actualEnd.y, actualEnd.z, 14, 0.3, 0.3, 0.3, 0.08);
 		level.sendParticles(ParticleTypes.END_ROD,
-				actualEnd.x, actualEnd.y, actualEnd.z, 6, 0.2, 0.2, 0.2, 0.05);
+				actualEnd.x, actualEnd.y, actualEnd.z, 4, 0.2, 0.2, 0.2, 0.05);
 
 		level.playSound(null, player.getX(), player.getY(), player.getZ(),
 				SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 0.7f, 1.6f);
