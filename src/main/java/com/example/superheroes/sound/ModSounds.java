@@ -9,6 +9,9 @@ import net.minecraft.sounds.SoundEvent;
 public final class ModSounds {
 	public static final SoundEvent LIGHTNING_THUNDER_ANIME = register("lightning.thunder.anime");
 	public static final SoundEvent LIGHTNING_THUNDER_LOUD = register("lightning.thunder.loud");
+	public static final SoundEvent UNIBEAM_CHARGE = register("unibeam.charge");
+	public static final SoundEvent UNIBEAM_BEAM = register("unibeam.beam");
+	public static final SoundEvent UNIBEAM_BLAST = register("unibeam.blast");
 
 	private ModSounds() {
 	}
