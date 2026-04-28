@@ -51,13 +51,11 @@ public final class UnibeamController {
 			MobEffects.MOVEMENT_SLOWDOWN,
 			MobEffects.WEAKNESS,
 			MobEffects.DIG_SLOWDOWN,
-			MobEffects.BLINDNESS,
 			MobEffects.DARKNESS
 	);
 	private static final Holder<MobEffect>[] AOE_DEBUFFS = effects(
 			MobEffects.MOVEMENT_SLOWDOWN,
 			MobEffects.WEAKNESS,
-			MobEffects.BLINDNESS,
 			MobEffects.DIG_SLOWDOWN,
 			MobEffects.HUNGER,
 			MobEffects.CONFUSION,
